@@ -25,7 +25,7 @@ COPY --from=0 /authentication_service_staging/target/authentication-service.jar 
 COPY ./server/authentication-service/apminsight-javaagent/* /apminsight-javaagent/
 
 # APM Agent Env
-ENV JAVA_TOOL_OPTIONS="--javaagent:[agent_directory_full_path]/apminsight-javaagent.jar"
+ENV JAVA_TOOL_OPTIONS="--javaagent:./server/authentication-service/apminsight-javaagent/apminsight-javaagent.jar"
 
 # Fire up our Spring Boot app by default
 CMD ["sh", "-c", "java -Dserver.port=$PORT -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -XX:+UseContainerSupport -Dspring.profiles.active=$ACTIVE_PROFILE -Djava.security.egd=file:/dev/./urandom -jar authentication-service.jar" ]
